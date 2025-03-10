@@ -221,7 +221,7 @@ app.post("/logout/:id", async (req, res) => {
     let date = new Date();
     let newDate = moment(date).format("YYYY-MM-DD HH:mm:ss");
 
-    let query = `UPDATE user SET event_id = null, active = '0', update_dt = '${newDate}' WHERE id = '${id}'`;
+    let query = `UPDATE user SET active = '0', update_dt = '${newDate}' WHERE id = '${id}'`;
 
     connection.query(query, (err, result) => {
       if (err) {
