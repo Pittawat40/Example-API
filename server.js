@@ -24,7 +24,7 @@ connection.connect((err) => {
   console.log("Connect db success !!");
   console.log("==========================");
 
-  let firstCreateQuery = `CREATE TABLE IF NOT EXISTS bb (
+  let firstCreateQuery = `CREATE TABLE IF NOT EXISTS user (
                   id int,
                   name varchar(255),
                   password varchar(255),
@@ -39,7 +39,7 @@ connection.connect((err) => {
     else console.log("Create db success !!");
   });
 
-  let firstInsertQuery = `INSERT INTO bb (id, name, password, active, role, update_dt) VALUES
+  let firstInsertQuery = `INSERT INTO user (id, name, password, active, role, update_dt) VALUES
       (1, 'admin', 'admin', 1, 'admin', '2025-03-10 01:55:12'),
       (2, 'arm', '1234', 1, 'user', '2025-03-10 10:29:02'),
       (3, 'bow', '1234', 0, 'user', '2025-03-09 20:17:31'),
@@ -70,7 +70,7 @@ connection.connect((err) => {
     }
   });
 
-  let secondCreateQuery = `CREATE TABLE IF NOT EXISTS aa (
+  let secondCreateQuery = `CREATE TABLE IF NOT EXISTS activity (
                   id int,
                   name varchar(255),
                   location varchar(255),
@@ -85,7 +85,7 @@ connection.connect((err) => {
     else console.log("Create db success !!");
   });
 
-  let secondInsertQuery = `INSERT INTO aa (id, name, location, flag_random, user_id, update_dt) VALUES
+  let secondInsertQuery = `INSERT INTO activity (id, name, location, flag_random, user_id, update_dt) VALUES
       (1, 'DANCING AT LUGHNASA', 'มหาวิทยาลัยกรุงเทพ', 0, '', '0000-00-00 00:00:00'),
       (2, 'FUDDY MEERS', 'มหาวิทยาลัยกรุงเทพ', 1, '16,6,15,14,5,13,4,3,11,17', '2025-03-10 01:52:52'),
       (3, 'Mission Impossibamm Concert', 'The Street Hall, The Street Ratchada', 1, '1,3,12,5,9,4,7,11,8,6', '2025-03-09 22:47:41'),
