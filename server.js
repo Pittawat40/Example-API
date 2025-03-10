@@ -23,6 +23,86 @@ connection.connect((err) => {
   }
   console.log("Connect db success !!");
   console.log("==========================");
+
+  let firstCreateQuery = `CREATE TABLE IF NOT EXISTS bb (
+                  id int,
+                  name varchar(255),
+                  password varchar(255),
+                  active int,
+                  role varchar(255),
+                  update_dt DATETIME,
+                  PRIMARY KEY (id)
+              )`;
+
+  connection.query(firstCreateQuery, (err, response) => {
+    if (err) console.log(err);
+    else console.log("Create db success !!");
+  });
+
+  let firstInsertQuery = `INSERT INTO bb (id, name, password, active, role, update_dt) VALUES
+      (1, 'admin', 'admin', 1, 'admin', '2025-03-10 01:55:12'),
+      (2, 'arm', '1234', 1, 'user', '2025-03-10 10:29:02'),
+      (3, 'bow', '1234', 0, 'user', '2025-03-09 20:17:31'),
+      (4, 'boy', '1234', 1, 'user', '2025-03-09 20:17:37'),
+      (5, 'go', '1234', 1, 'user', '2025-03-09 20:19:51'),
+      (6, 'jack', '1234', 0, 'user', '2025-03-09 20:22:47'),
+      (7, 'jo', '1234', 0, 'user', '2025-03-09 20:22:54'),
+      (8, 'joy', '1234', 0, 'user', '2025-03-09 20:23:12'),
+      (9, 'man', '1234', 0, 'user', '2025-03-09 20:23:24'),
+      (10, 'sand', '1234', 0, 'user', '2025-03-09 20:23:34'),
+      (11, 'may', '1234', 0, 'user', '2025-03-09 20:23:46'),
+      (12, 'chom', '1234', 0, 'user', '2025-03-09 20:37:00'),
+      (13, 'warm', '1234', 0, 'user', '2025-03-09 22:58:26'),
+      (14, 'ta', '1234', 0, 'user', '2025-03-09 22:58:32'),
+      (15, 'pop', '1234', 0, 'user', '2025-03-09 22:58:39'),
+      (16, 'bee', '1234', 0, 'user', '2025-03-09 22:58:47'),
+      (17, 'tae', '1234', 0, 'user', '2025-03-09 22:58:54'),
+      (18, 'tang', '1234', 0, 'user', '2025-03-09 22:59:02'),
+      (19, 'aom', '1234', 0, 'user', '2025-03-09 23:56:09'),
+      (20, 'game', '1234', 0, 'user', '2025-03-09 23:56:09')
+      ON DUPLICATE KEY UPDATE id = id`;
+
+  connection.query(firstInsertQuery, (err, response) => {
+    if (err) console.log(err);
+    else {
+      console.log("Insert db success !!");
+      console.log("==========================");
+    }
+  });
+
+  let secondCreateQuery = `CREATE TABLE IF NOT EXISTS aa (
+                  id int,
+                  name varchar(255),
+                  location varchar(255),
+                  flag_random int,
+                  user_id varchar(255),
+                  update_dt DATETIME,
+                  PRIMARY KEY (id)
+              )`;
+
+  connection.query(secondCreateQuery, (err, response) => {
+    if (err) console.log(err);
+    else console.log("Create db success !!");
+  });
+
+  let secondInsertQuery = `INSERT INTO aa (id, name, location, flag_random, user_id, update_dt) VALUES
+      (1, 'DANCING AT LUGHNASA', 'มหาวิทยาลัยกรุงเทพ', 0, '', '0000-00-00 00:00:00'),
+      (2, 'FUDDY MEERS', 'มหาวิทยาลัยกรุงเทพ', 1, '16,6,15,14,5,13,4,3,11,17', '2025-03-10 01:52:52'),
+      (3, 'Mission Impossibamm Concert', 'The Street Hall, The Street Ratchada', 1, '1,3,12,5,9,4,7,11,8,6', '2025-03-09 22:47:41'),
+      (4, 'Layzy Music Festival', 'SEA SAND SUN RESORT, HUAHIN', 0, '', '0000-00-00 00:00:00'),
+      (5, 'HOLLY JOLLY FUN RUN', 'Sri Nakhon Khuean Khan Park (Bang Krachao), Samut Prakan', 0, '', '0000-00-00 00:00:00'),
+      (6, 'SIAM J-SHOW FAN CONCERT', 'โรงละครสยามแฟนตาซี (เอเชียทีค เดอะ ริเวอร์ฟร้อนท์)', 0, '', '0000-00-00 00:00:00'),
+      (7, 'James Alyn - Coming Home Concert', 'Lido Connect, Hall 3', 1, '3,5,1,16,18,17,7,10,12,13', '2025-03-10 00:25:23'),
+      (8, 'MU:IN PRESENTS MR.BLACK', '5th floor of Donki Mall. ', 1, '6,11,16,3,8,18,12,5,17,14', '2025-03-09 22:59:34')
+      ON DUPLICATE KEY UPDATE id = id`;
+
+  connection.query(secondInsertQuery, (err, response) => {
+    if (err) console.log(err);
+    else {
+      console.log("Insert db success !!");
+      console.log("==========================");
+    }
+  });
 });
 
 /// login ///
