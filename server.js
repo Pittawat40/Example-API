@@ -31,8 +31,8 @@ app.post("/login", async (req, res) => {
   let arr = [name, password];
   if (arr.includes(undefined))
     return res
-      .status(400)
-      .send({ message: "Invalid Data !!", payload: [], result: 0 });
+      .status(200)
+      .send({ message: "Please enter this field !!", payload: [], result: 0 });
 
   try {
     let query = `SELECT * FROM user WHERE name = '${name}'`;
@@ -48,6 +48,12 @@ app.post("/login", async (req, res) => {
       let newDate = moment(date).format("YYYY-MM-DD HH:mm:ss");
 
       if (response.length) {
+        if (response[0].password != password) {
+          return res
+            .status(200)
+            .send({ message: "Password not match !!", payload: [], result: 0 });
+        }
+
         try {
           let query = `UPDATE user SET 
                             active = '1' ,
@@ -128,8 +134,8 @@ app.post("/logout/:id", async (req, res) => {
   const id = req.params.id;
   if (!id)
     return res
-      .status(400)
-      .send({ message: "Invalid Data !!", payload: [], result: 0 });
+      .status(200)
+      .send({ message: "Please enter this field !!", payload: [], result: 0 });
 
   try {
     let date = new Date();
@@ -159,13 +165,9 @@ app.post("/logout/:id", async (req, res) => {
 
 /// list activity ///
 app.get("/activity", async (req, res) => {
-  const { name, take, skip } = req.query;
-
   try {
-    let query = `SELECT * FROM activity ${
-      name ? `WHERE name = '${name}'` : ""
-    }`;
-    if (take && skip) query = `${query} LIMIT ${take} OFFSET ${skip}`;
+    let query = `SELECT * FROM activity`;
+    // if (take && skip) query = `${query} LIMIT ${take} OFFSET ${skip}`;
 
     connection.query(query, (err, result) => {
       if (err) {
@@ -194,8 +196,8 @@ app.get("/activity/:id", async (req, res) => {
   const id = req.params.id;
   if (!id)
     return res
-      .status(400)
-      .send({ message: "Invalid Data !!", payload: [], result: 0 });
+      .status(200)
+      .send({ message: "Please enter this field !!", payload: [], result: 0 });
 
   try {
     let query = `SELECT * FROM activity WHERE id = ${id}`;
@@ -247,56 +249,13 @@ app.get("/activity/:id", async (req, res) => {
   }
 });
 
-/// update user join event ///
-app.post("/user/:id", async (req, res) => {
-  const id = req.params.id;
-  if (!id)
-    return res
-      .status(400)
-      .send({ message: "Invalid Data !!", payload: [], result: 0 });
-
-  if (Object.keys(req.body).length === 0)
-    return res
-      .status(400)
-      .send({ message: "Invalid Data !!", payload: [], result: 0 });
-  const { event_id } = req.body;
-
-  try {
-    let date = new Date();
-    let newDate = moment(date).format("YYYY-MM-DD HH:mm:ss");
-
-    let query = `UPDATE user SET 
-                    ${event_id ? `event_id = '${event_id}',` : ""}
-                    update_dt = '${newDate}'
-                    WHERE id = ${id}`;
-
-    connection.query(query, (err, result) => {
-      if (err) {
-        console.log(err);
-        res
-          .status(400)
-          .send({ message: "Update data fail !!", payload: [], result: 0 });
-      }
-
-      res
-        .status(200)
-        .json({ message: "Update Success !!", payload: [], result: 1 });
-    });
-  } catch (err) {
-    console.log(err);
-    res
-      .status(500)
-      .send({ message: "Something wrong !!", payload: [], result: 0 });
-  }
-});
-
 /// random lucky ///
 app.get("/random/:id", async (req, res) => {
   const id = req.params.id;
   if (!id)
     return res
-      .status(400)
-      .send({ message: "Invalid Data !!", payload: [], result: 0 });
+      .status(200)
+      .send({ message: "Please enter this field !!", payload: [], result: 0 });
 
   try {
     let query = `SELECT * FROM user WHERE role != 'admin'`;
